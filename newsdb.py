@@ -67,6 +67,7 @@ def getMostErrors():
 
 
 # Get information results
-popularArticles()
-popularAuthors()
-getMostErrors()
+if __name__ == "__main__": 
+  popularArticles()
+  popularAuthors()
+  getMostErrors()
