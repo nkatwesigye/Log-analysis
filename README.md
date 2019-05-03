@@ -1,9 +1,9 @@
 
 
 1) ## Three  views were created to solve the second problem to select the most
-popular authors: ##
+popular authors:
  - slug:
-     This view selects the log path from the log table and replaces the
+     <p> This view selects the log path from the log table and replaces the
      "/article" string with and empty string and aggregates the slug column
      into a views column counting similar slugs
 
@@ -11,7 +11,7 @@ popular authors: ##
      ----------------------------------
      ``create view slug as SELECT replace(log.path, '/article/', '')
      AS name , count(*) as views from log group by name order by views desc;``
-
+     </p>
  - article_authors:
      This view selects authors from the articles by their ids and matches them
      up with the views from the slug view , there by allowing us to see which
