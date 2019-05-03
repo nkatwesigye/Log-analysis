@@ -2,7 +2,7 @@
 
 1) ## Three  views were created to solve the second problem to select the most
 popular authors:
- - # slug:
+ - ### slug:
      <p> This view selects the log path from the log table and replaces the
      "/article" string with and empty string and aggregates the slug column
      into a views column counting similar slugs
@@ -12,7 +12,7 @@ popular authors:
      ``create view slug as SELECT replace(log.path, '/article/', '')
      AS name , count(*) as views from log group by name order by views desc;``
      </p>
- - # article_authors:
+ - ### article_authors:
      <p> This view selects authors from the articles by their ids and matches them
      up with the views from the slug view , there by allowing us to see which
      ids have how many views.
@@ -24,7 +24,7 @@ popular authors:
      articles.author,articles.slug,slug.name,slug.views from articles left join
      slug on articles.slug = slug.name;``
      </p>
- - # author_views
+ - ### author_views
      <p> This view selects the author id and sums up the total number of views for
      each author including authors with multiple articles
 
@@ -46,7 +46,7 @@ popular authors:
 
 2) ## Two views were created to solve the date with errors above 1% ##
 
-- # date_errors
+- ### date_errors
     <p> This view selects the errors for each date from the log table , it also
     converts the long datetime format to only date for the date column
 
@@ -56,7 +56,7 @@ popular authors:
       count(*) from log where status != '200 OK' group by date order by
       count desc;``
    </p>
-- # date_error_log
+- ### date_error_log
     <p> This view consolidates the date,errors for each day and the total logs
     for that day. This view allows us to parse this information using python to
     generate the percentage of logs that show up as errors for each day .
