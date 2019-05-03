@@ -32,7 +32,7 @@ popular authors:
      --------------------------------------------
      ``create view author_views as select author,sum(views) as views
      from article_authors group by author order by views desc;``
-     
+
     NOTE:
     The final query used in the python code consolidates the author_views
     and authors table to select the most popular authors
@@ -56,6 +56,15 @@ popular authors:
       count(*) from log where status != '200 OK' group by date order by
       count desc;``
    </p>
+   - ### date_logs
+       <p> This view selects the total logs for each day as date and sums them
+       up as count , ordered from highest to lowest number of logs
+      
+       command to recreate the date_logs view:
+       ------------------------------------------
+       ``create view date_logs as select time::timestamp::date  
+        as date , count(*) from log  group by date order by count desc;``
+        </p>
 - ### date_error_log
     <p> This view consolidates the date,errors for each day and the total logs
     for that day. This view allows us to parse this information using python to
