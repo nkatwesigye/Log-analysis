@@ -56,7 +56,7 @@ popular authors:
       count(*) from log where status != '200 OK' group by date order by
       count desc;``
    </p>
-   - ### date_logs
+- ### date_logs
        <p> This view selects the total logs for each day as date and sums them
        up as count , ordered from highest to lowest number of logs
       
