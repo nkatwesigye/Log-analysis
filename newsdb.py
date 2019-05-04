@@ -56,19 +56,21 @@ def popularAuthors():
 def getMostErrors():
     connect_to_psql = ConnectDb('news', 'db_connect')
     c = connect_to_psql.openConnectDb()
-    c.execute("select * from date_error_log")
+    c.execute("select * from (select date_error_log.date,round(100 * \
+    (errors::numeric/all_logs),1) as error_percent from \
+    date_error_log group by error_percent,date_error_log.date order \
+    by error_percent desc) as most_errors where error_percent > 1")
     results = c.fetchall()
     print("Errors above 1%")
     for errors in results:
-        percent_error = (100 * float(errors[1]) / float(errors[2]))
-        if percent_error > 1:
-            day_date = (errors[0]).strftime('%d %b,%Y')
-            print("%s --  %2.1f%s errors" % (day_date, percent_error, '%'))
+        day_date = (errors[0]).strftime('%d %b,%Y')
+        percent_error = (errors[1])
+        print("%s --  %2.1f%s errors" % (day_date, percent_error, '%'))
     connect_to_psql.closeConnectDb()
 
 
 # Get information results
 if __name__ == "__main__":
     popularArticles()
-    #popularAuthors()
-    #getMostErrors()
+    popularAuthors()
+    getMostErrors()
