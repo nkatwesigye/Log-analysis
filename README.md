@@ -1,4 +1,15 @@
-
+``select table_name from INFORMATION_SCHEMA.views WHERE table_schema = ANY (current_schemas(false))
+;``
+Should give you these views in the result 
+   table_name    
+-----------------
+ slug
+ article_authors
+ author_views
+ popularby_slug
+ date_errors
+ date_logs
+ date_error_log
 
 1) ## one view was created to solve the first problem selecting the most
 popular articles:
