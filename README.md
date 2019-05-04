@@ -1,5 +1,13 @@
 
 
+1) ## one view was created to solve the first problem selecting the most
+popular articles:
+
+     command to recreate the popularby_slug view:
+     ----------------------------------
+     ``create view popularby_slug as SELECT replace(log.path, '/article/', '')
+     AS slug , count(*) as views from log where path != '/' group by slug order
+     by views desc limit 3;``
 1) ## Three  views were created to solve the second problem to select the most
 popular authors:
  - ### slug:
@@ -44,7 +52,7 @@ popular authors:
     </p>
 
 
-2) ## Two views were created to solve the date with errors above 1% ##
+2) ## Three views were created to solve the date with errors above 1% ##
 
 - ### date_errors
     <p> This view selects the errors for each date from the log table , it also
@@ -59,7 +67,7 @@ popular authors:
 - ### date_logs
        <p> This view selects the total logs for each day as date and sums them
        up as count , ordered from highest to lowest number of logs
-      
+
        command to recreate the date_logs view:
        ------------------------------------------
        ``create view date_logs as select time::timestamp::date  

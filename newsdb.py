@@ -24,12 +24,13 @@ class ConnectDb:
 def popularArticles():
     connect_to_psql = ConnectDb('news', 'db_connect')
     c = connect_to_psql.openConnectDb()
-    c.execute("select path,count(path) as views from \
-    log group by path order by views desc limit 4")
+    c.execute("select articles.title,popularby_slug.views from articles \
+    ,popularby_slug where articles.slug = popularby_slug.slug order by \
+     views desc")
     results = c.fetchall()
     print("Most popular articles of all ")
-    for article in (results[1:4]):
-        print(str(article[0][9:]) + " -- " +
+    for article in (results):
+        print(str(article[0]) + " -- " +
               str(article[1]) + " views")
     print("\n")
     connect_to_psql.closeConnectDb()
@@ -67,7 +68,7 @@ def getMostErrors():
 
 
 # Get information results
-if __name__ == "__main__": 
-  popularArticles()
-  popularAuthors()
-  getMostErrors()
+if __name__ == "__main__":
+    popularArticles()
+    #popularAuthors()
+    #getMostErrors()
