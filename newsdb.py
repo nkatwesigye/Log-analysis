@@ -28,7 +28,7 @@ def popularArticles():
     ,popularby_slug where articles.slug = popularby_slug.slug order by \
      views desc")
     results = c.fetchall()
-    print("Most popular articles of all ")
+    print("Most popular articles of all time")
     for article in (results):
         print(str(article[0]) + " -- " +
               str(article[1]) + " views")
