@@ -35,7 +35,7 @@ give you the results displayed
     date_errors
     date_logs
     date_error_log
-    
+
 
 ## Database setup instructions
 
@@ -146,8 +146,10 @@ On which days did more than 1% of requests lead to errors?
 
     ##### command to recreate the author_views view:
     ```sql
-    create view date_error_log as select date_errors.date,date_errors.count
-    as errors ,date_logs.count as all_logs from date_errors,date_logs where
+    create view date_error_log as
+    select date_errors.date,date_errors.count
+    as errors ,date_logs.count as all_logs
+    from date_errors,date_logs where
     date_errors.date = date_logs.date;
     ```
 
