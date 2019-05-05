@@ -26,8 +26,7 @@ give you the results displayed
    ```
 
     Expected views in the result  
-
-
+    `
     table_name   
     slug
     article_authors
@@ -36,7 +35,7 @@ give you the results displayed
     date_errors
     date_logs
     date_error_log
-
+    `
 
 ## Database setup instructions
 
