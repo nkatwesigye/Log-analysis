@@ -125,3 +125,9 @@ On which days did more than 1% of requests lead to errors?
   the news database to run successfully.
   #### Tool execution:
   `python newsdb.py`
+
+## License
+
+Log analysis tool is Copyright © 2008-2019 nkatwesigye . It is free software,
+and may be redistributed under the terms specified in the
+[LICENSE](https://creativecommons.org/licenses/by/3.0/us/) file.
