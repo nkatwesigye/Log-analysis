@@ -20,7 +20,8 @@ If the all the views are created correctly running the query below will
 give you the results displayed
 
    ```sql
-    select table_name from INFORMATION_SCHEMA.views WHERE table_schema = ANY
+    select table_name from INFORMATION_SCHEMA.views
+    WHERE table_schema = ANY
     (current_schemas(false));
     ```
 
@@ -35,7 +36,7 @@ give you the results displayed
     date_errors
     date_logs
     date_error_log
-    
+
 
 ## Database setup instructions
 
@@ -56,8 +57,10 @@ What are the most popular three articles of all time?
 
       ##### command to recreate the popularby_slug view:
       ```sql
-      create view popularby_slug as SELECT replace(log.path, '/article/', '')
-      AS slug , count(*) as views from log where path != '/' group by slug order
+      create view popularby_slug as
+      SELECT replace(log.path, '/article/', '')
+      AS slug , count(*) as views from log
+      where path != '/' group by slug order
       by views desc limit 3;
       ```
 
@@ -70,8 +73,10 @@ Who are the most popular article authors of all time?
 
      ##### command to recreate the slug view:
      ```sql
-     create view slug as SELECT replace(log.path, '/article/', '')
-     AS name , count(*) as views from log group by name order by views desc;
+     create view slug as SELECT
+       replace(log.path, '/article/', '')
+     AS name , count(*) as views from
+     log group by name order by views desc;
      ```
 
  - #### article_authors view:
@@ -83,7 +88,8 @@ Who are the most popular article authors of all time?
      ##### command to recreate the article_authors view:
      ```sql
      create view article_authors as select
-     articles.author,articles.slug,slug.name,slug.views from articles left join
+     articles.author,articles.slug,
+     slug.name,slug.views from articles left join
      slug on articles.slug = slug.name;
      ```
  - #### author_views view:
@@ -92,8 +98,10 @@ Who are the most popular article authors of all time?
 
      ##### command to recreate the author_views view:
      ```sql
-     create view author_views as select author,sum(views) as views
-     from article_authors group by author order by views desc;
+     create view author_views as
+     select author,sum(views) as views
+     from article_authors group by
+     author order by views desc;
      ```
 
     NOTE:
@@ -102,7 +110,8 @@ Who are the most popular article authors of all time?
 
     ##### command to  query most popular authors using the above author_views:
     ```sql
-    select authors.name,author_views.views from author_views,authors
+    select authors.name,author_views.views
+    from author_views,authors
     where authors.id = author_views.author;
     ```
 
@@ -114,9 +123,11 @@ On which days did more than 1% of requests lead to errors?
 
     ##### command to recreate the author_views view:
     ```sql
-    create view date_errors as select time::timestamp::date  as date,
-     count(*) from log where status != '200 OK' group by date order by
-     count desc;
+    create view date_errors as
+    select time::timestamp::date  as date,
+    count(*) from log where status != '200 OK'
+    group by date order by
+    count desc;
      ```
 - #### date_logs view:
     This view selects the total logs for each day as date and sums them
@@ -124,8 +135,10 @@ On which days did more than 1% of requests lead to errors?
 
     ##### command to recreate the date_logs view:  
     ```sql
-    create view date_logs as select time::timestamp::date
-    as date , count(*) from log  group by date order by count desc;
+    create view date_logs as
+    select time::timestamp::date
+    as date , count(*) from log  
+    group by date order by count desc;
     ```
 - #### date_error_log view:
     This view consolidates the date,errors for each day and the total logs
