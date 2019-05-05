@@ -20,10 +20,10 @@ If the all the views are created correctly running the query below will
 give you the results displayed
 
    ```sql
-    select table_name from INFORMATION_SCHEMA.views
-    WHERE table_schema = ANY
-    (current_schemas(false));
-    ```
+   select table_name from INFORMATION_SCHEMA.views
+   WHERE table_schema = ANY
+   (current_schemas(false));
+   ```
 
     Expected views in the result  
 
@@ -74,7 +74,7 @@ Who are the most popular article authors of all time?
      ##### command to recreate the slug view:
      ```sql
      create view slug as SELECT
-       replace(log.path, '/article/', '')
+     replace(log.path, '/article/', '')
      AS name , count(*) as views from
      log group by name order by views desc;
      ```
@@ -128,7 +128,7 @@ On which days did more than 1% of requests lead to errors?
     count(*) from log where status != '200 OK'
     group by date order by
     count desc;
-     ```
+    ```
 - #### date_logs view:
     This view selects the total logs for each day as date and sums them
     up as count , ordered from highest to lowest number of logs  
